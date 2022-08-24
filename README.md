@@ -9,3 +9,5 @@ Projet d'intranet pour Humans connexion
 +Dépôt de congés
 +Reservation de salles
 +Questionnaires modifiables par l'admin
+
+Utilisation de date picker tempus dominus, bootstrap, slickslider, symfony forms...
