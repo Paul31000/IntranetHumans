@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}     
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+{% endblock %}
+
+{% block body %}  
+        <div class="px-4">
+            {% for salle in agenda %}
+                <br><br><br>
+                <div><h2>{{salle.nomSalle}}</h2><a href="/booking_salle">Réserver une salle</a></div>
+                <br>
+                <div class="multiple-items">
+                    
+                        {% for jour in salle.tabOccupation %}
+                            <div class="element-calendrier">
+                                <div class="jour">{{jour.jour|date('l')|raw|trans({},'messages')}} {{jour.jour|date('d')}} {{jour.jour|date('M')| trans({},'messages')}}</div>
+                                    {% for heure in jour.html %}
+                                        <div class="quart-heure">{{heure.heure|date('H:i')}}:{{heure.html|raw}}</div>
+                                        
+                                    {% endfor %}
+                            </div>
+                        {% endfor %}
+                            
+                </div>
+            {% endfor %} 
+            <br><br><br>
+       </div> 
+{% endblock %}  

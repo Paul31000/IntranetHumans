@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <div class="container page-edit">
+            <div class="row ">
+                <div class="col-12 d-flex flex-column justify-content-between px-0">
+                    <br><br> 
+                    <h2>Résultats de la recherche:</h2>
+                </div>
+                   
+                    {% for lien in liens %}
+                        <div class="col-4 element_recherche align-items-center d-flex flex-column px-4">
+                                <br>
+                                <div class="element_lien">
+                                    <a href="{{lien.url}}" aria-label="{{lien.apropos}}" target="_blank">
+                                                <div class="fond_image"><img class="lien_page_courante" src="{{lien.image}}"  alt="{{lien.description}}" ></div>
+                                                <div class="legende">{{lien.description}}</div>
+                                    </a>
+                                </div>
+                                        
+                                <br>
+                                <div class="row ">
+                                {% for categorie in lien.categorie %}
+                                    <div class="col-5 cadre-formulaire m-1 p-1">
+                                        <div class="couleur_categorie_edit {{ categorie }}">pour la section <strong>{{categorie}}:</strong></div>
+                                        <br>
+                                        {% for page in lien.pages %}
+                                            sur la page <strong>{{page.nom}}:</strong><br>
+                                            {% if page.nomUrl == "accueil" %}
+                                                <a href="/">y aller!</a><br><br>
+                                            {% else %}
+                                                <a href="/page/{{categorie}}/{{page.nomUrl}}">y aller!</a><br><br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                                </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+{% endblock %}

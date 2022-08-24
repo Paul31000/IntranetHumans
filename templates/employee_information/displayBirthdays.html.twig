@@ -1,0 +1,15 @@
+{% if birthdays is not empty %}
+	<div id="popup" class="popup">
+		<div class="popup-content d-flex flex-column justify-content-center align-items-end">
+			<button id="close_birthday"><img src="{{asset('build/images//croix.png')}}"></button>
+			<div class="d-flex flex-column align-items-center">
+				<img class="birthday" src="{{asset('build/images//happy-birthday.png')}}" alt="birthday">
+				<div class="texte">
+					{% for employee in birthdays %}
+						<li>{{employee.prenom}} {{employee.nom}}</li>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

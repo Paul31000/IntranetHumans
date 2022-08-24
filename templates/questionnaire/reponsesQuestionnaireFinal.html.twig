@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+        <div class="container page-edit">
+        <div class="row ">
+            <div class="col-12 d-flex flex-column justify-content-between px-0">
+                <h2>Reponses au questionnaire {{form}}</h2>
+                    <div class="tableau_edition_page table-bordure">
+                        
+                        <table>
+                            <tr>
+                                <td>pseudo</td>
+                                {% for champ in reponses[1].champs | default('')%}
+                                    <td>{{champ.libelle}}</td>
+                                {% endfor %}
+                                <td>supprimer cette réponse</td>
+                            </tr>
+                            
+                            {% for reponse in reponses %}
+                            <tr>
+                                <td>{{ reponse.pseudo[0] }}</td>
+                                {% for champ in reponse.champs %}
+                                    <td>{{ champ.reponse }}</td>
+                                {% endfor %}
+                                <td><a href="{{ path('supprimerReponse', { 'id': reponse.id.0, 'idQuestionnaire': formId })     }}">Supprimer cette réponse</a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <a href="../../file.csv">téléchargez les réponses au format csv</a>
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

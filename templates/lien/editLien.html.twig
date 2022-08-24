@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+        <br>
+        <div class="container page-edit">
+            <div class="row ">
+                <div class="col-12 d-flex flex-row justify-content-between px-0">
+                    <h2>Edition du lien et des pages pour: <img class="edit_lien_thumbnail" src="{{ lienVise.image }}">{{lienVise.description}}</h2>
+                </div>
+                
+                <br><br><br>
+                <div class="col-6 d-flex flex-column justify-content-between cadre-formulaire p-3">
+                    
+                    <h3>Le contenu du lien: </h3>
+                        <div class="guidelines">Appuyez sur ctrl pour ajouter plusieurs éléments sur les menus multiples</div>
+                        {{ form_start(form) }}
+                            <div class="element_nouveau">{{ form_label(form.description) }} {{ form_widget(form.description) }} </div>
+                            <div class="element_nouveau">Icone {{ form_widget(form.image) }} </div>
+                            <div class="element_nouveau apropos">A propos {{ form_widget(form.apropos) }} </div>
+                            <div class="element_nouveau">{{ form_label(form.url) }} {{ form_widget(form.url) }} </div>
+                            <div class="element_nouveau">{{ form_label(form.pages) }} {{ form_widget(form.pages) }} </div>
+                            <div class="element_nouveau">{{ form_label(form.categorie) }} {{ form_widget(form.categorie) }} </div>
+                            <div class="element_nouveau">{{ form_label(form.sauverLeLien) }} {{ form_widget(form.sauverLeLien) }} </div>
+                        {{ form_end(form) }}
+                </div>
+
+                <br>
+                <div class="col-12 d-flex flex-column justify-content-between px-0 py-3 table-bordure">
+                    
+                    <h3>Visibilité du lien sur les pages : </h3>
+                    <table>
+                        <tr>
+                            <td>Page</td>
+                            <td>Lien présent pour catégories</td>
+                            <td>Ajouter lien aux catégories</td>
+                            <td>Supprimer lien aux catégories</td>
+                        </tr>
+
+                    {% for page in pages %}
+                        <tr>
+                            <td>{{ page.nom }}</td>
+                            <td>{% for lien in page.liens %}
+                                    {% if lienVise == lien %}
+                                        {% for categorie in lienVise.categorie %}
+                                            <div class="couleur_categorie_edit {{ categorie }}">{{ categorie }}/</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <div><a href="{{ path('AjouterLienAPage', { 'idPage': page.id, 'idLien':lienVise.id })     }}">ajouter à {{page}}</a></div>
+                            </td>
+                            <td><a href="{{ path('SupprimerLienRedirectLien', { 'idPage': page.id, 'idLien':lienVise.id })     }}">Supprimer lien de {{page}}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                   
+                    
+
+                </div>
+            </div>
+        </div>
+   
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+        <div class="container page-edit">
+        <div class="row ">
+            <div class="col-12 d-flex flex-column justify-content-between px-0">
+                <br><br> 
+                <h2>Gérer les questionnaires</h2>
+                
+                <div class="tableau_edition_page table-bordure">
+                    
+                    <table>
+                        <tr>
+                            <td>nom du questionnaire</td>
+                            <td>lien vers le questionnaire</td>
+                            <td>voir réponses</td>
+                            <td>éditer les champs</td>
+                            <td>supprimer le questionnaire</td>
+                        </tr>
+                        
+                        {% for questionnaire in questionnaires %}
+                        <tr>
+                            <td>{{ questionnaire.sujet }}</td>
+                            <td>/handleform/{{ questionnaire.nomTechnique }}</td>
+                            <td>
+                                {% if questionnaire.remplissages|first != null %}
+                                    <a href="/reponses/{{questionnaire.nomTechnique}}">voir réponses</a>
+                                {% endif %}
+                                {% if questionnaire.remplissages|first == null %}
+                                    pas de réponse pour le moment
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if questionnaire.remplissages|first != null %}
+                                    Il y a des réponses vous ne pouvez plus éditer le questionnaire.
+                                {% endif %}
+                                {% if questionnaire.remplissages|first == null %}
+                                    <a href="/editTousChamps/{{questionnaire.nomTechnique}}">éditer les champs</a></td>
+                                {% endif %}
+                            
+                            
+                            <td><a href="{{ path('SupprimerQuestionnaire', { 'id': questionnaire.id })     }}">Supprimer {{ questionnaire.sujet }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+             
+            <div class="col-5 d-flex flex-column">
+            <br><br> <br><br>
+                <div class="cadre-formulaire p-3">
+                    <h2>créer un questionnaire</h2>
+                    {{ form_start(form) }}
+                        <div class="element_nouveau">{{ form_label(form.sujet) }}{{ form_widget(form.sujet) }}</div>
+                        <div class="element_nouveau">{{ form_widget(form.sauverLeQuestionnaire) }}</div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+   {% block head %}{% endblock %}
+    
+    {% block body %}
+        <br><br><br>
+		 <div class="container page-edit">
+            <div class="row d-flex justify-content-center">
+                <div class="col-8 cadre-formulaire">
+					<h2>Edition du message d'accueil</h2>
+                        <div class="guidelines">Utilisez les balises html p br et autres pour mettre en forme le texte </div>
+						{{ form_start(form) }}
+                            <div class="element_nouveau">{{ form_label(form.contenu) }} {{ form_widget(form.contenu) }} </div>
+                            <div class="element_nouveau">Publier jusqu'à: {{ form_widget(form.publierJusqua) }} </div>
+                        {{ form_end(form) }}
+                        <br>
+					
+				</div>
+			</div>
+		</div>
+	{% endblock %}

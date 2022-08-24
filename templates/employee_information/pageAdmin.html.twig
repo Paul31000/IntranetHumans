@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+   {% block head %}{% endblock %}
+    
+    {% block body %}
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12 d-flex justify-content-between align-items-center">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="retour-page-submit d-flex justify-content-center align-items-center"><a class="" href="/"><img class="" src="{{asset('build/images//fleche.png')}}" alt="retour accueil"></a></div>
+						<img class="logo-page-submit" src="{{asset('build/images//Groupe3.svg')}}" alt="logo-humans">
+					</div>
+					<h2>Dates d'anniversaires</h2>
+					<a class="black-button" href="/employee_submit">Ajouter une date d'anniversaire</a>
+				</div>
+			</div>
+		</div>
+		<div class="trait-horizontal"></div>
+		<div class="container page-edit">
+            <div class="row d-flex justify-content-center">
+                <div class="col-10">
+					<br><br><br>
+							<div class="d-flex flex-row align-items-center element-tableau tableau-sans-bordure date-naissance"> 
+							<table>
+								<tr>
+									<td>Prénom</td>
+									<td>Nom</td>
+									<td>Date de naissance</td>
+									<td></td>
+								</tr>
+							{% for employee in employees %}
+								<tr>
+									<td>{{ employee.prenom }}</td>
+									<td>{{ employee.nom }}</td>
+									<td>{{ employee.dateNaissance|date("d M Y") }}</td>
+									<td><a href="{{ path('supprimerAnniversaire', { 'idEmployee': employee.id })     }}"><img src="{{asset('build/images//croix.png')}}"></a></td>
+								</tr>
+							{% endfor %}
+							</table>
+							<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+   {% block head %}
+   {% endblock %}
+    
+    {% block body %}
+
+        <div class="container-fluid recherche-accueil">
+            <div class="row ">
+                <div class="col-12 d-flex justify-content-end rechercher-header px-0">
+                    {{ render(controller('App\\Controller\\SearchController::searchBar')) }}
+                </div>
+            </div>
+            </br></br></br></br>
+        </div>
+        <div class="container-fluid contenu-accueil">
+            <div class="row colones-accueil">
+                <div class="col-1"></div>
+                <div class="col-11 col-sm-4 py-2 py-lg-0 px-1 BE-numerique">
+                    <img class="logo" src="{{asset('build/images//Groupe3.svg')}}" alt="logo-humans">
+                    <h1>BUREAU <br> D'ÉTUDE <br>NUMÉRIQUE. <br></h1>
+                    <div class="marqueur-titre">L'intranet</div>
+                </div>
+
+                <a class="col-12 col-lg-2 px-1 py-2 py-lg-0 humans column-group d-flex justify-content-between align-items-center" href="/page/huco/gerer-projet">
+                    <div></div>
+                    <img class="" src="{{asset('build/images//diese.png')}}" alt="logo-humans">
+                    <div class="title-column">
+                        <div class="title">HUMAN'S</div>
+                        <div class="equipe">L'ÉQUIPE WEB</div>
+                    </div>
+                </a>
+
+                <a class="col-12 col-lg-2 px-1 py-2 py-lg-0 data column-group d-flex justify-content-between align-items-center" href="/page/data/gerer-projet">
+                    <div></div>
+                    <img class="" src="{{asset('build/images//1.png')}}" alt="logo-data">
+                    <div class="title-column">
+                        <div class="title">DATA EXPERTISE</div>
+                        <div class="equipe">L'ÉQUIPE INFO</div>
+                    </div>
+                </a>
+
+                <a class="col-12 col-lg-2 px-1 admin-compta column-group d-flex justify-content-between align-items-center" href="/page/compta/gerer-projet">
+                    <div></div>
+                    <img class="" src="{{asset('build/images//somme.png')}}" alt="logo-compta">
+                    <div class="title-column">
+                        <div class="title">ADMIN/COMPTA</div>
+                        <div class="equipe">L'ÉQUIPE ADMIN</div>
+                    </div>
+                </a>
+                
+                <div class="col-1"></div>
+                
+            </div>
+            <div class="espace-vide-accueil">
+                </br>
+            </div>
+            <div class="row bandeau-lien-accueil pb-0 mb-0">
+                <div class="col-4 d-flex flex-column justify-content-center align-items-center title-lien-accueil fond-bleu-fonce">
+                    <div><h3>Accès rapides</h3></div>
+                    <div class="enunclic">En un clic!</div>
+                </div>
+                <div class="col-8 liens-accueil fond-bleu">
+                    <div class="scroll-bandeau-accueil d-flex justify-content-center align-items-top ">
+                    
+                        {% for lien in tab_links %}
+
+                            <div class="element_lien mx-5 mt-5">
+                                <div class="">
+                                    <a href="{{lien.url}}" aria-label="{{lien.apropos}}" target="_blank">
+                                        <div class="fond_image"><img class="lien_page_courante" src="{{lien.image}}"  alt="{{lien.description}}" ></div>
+                                        <div class="legende pt-1 pb-0">{{lien.description}}</div>
+                                    </a>
+                                </div>
+                            </div>   
+                            
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {{ render(controller('App\\Controller\\MessageController::getMessage')) }}
+        {{ render(controller('App\\Controller\\EmployeeInformationController::getBirthdays')) }}
+
+    {% endblock %}
+
+
+
+
+

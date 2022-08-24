@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+        <div class="container page-edit">
+            <div class="row ">
+                
+                <div class="col-2"></div>
+                <div class="col-7 d-flex flex-column">
+                <br><br><br><br>
+                    <div class="cadre-formulaire p-3">
+                        <h2>edition du champ: {{champ.libelle}}</h2>
+                        {{ form_start(form) }}
+                            <div class="element_nouveau">{{ form_label(form.libelle) }}{{ form_widget(form.libelle) }}</div>
+                            <div class="element_nouveau">{{ form_label(form.type) }}{{ form_widget(form.type) }}</div>
+                            <div class="element_nouveau">{{ form_label(form.ordre) }}{{ form_widget(form.ordre) }}</div>
+                            <div class="element_nouveau">{{ form_label(form.questionnaire) }}{{ form_widget(form.questionnaire) }}</div>
+                            <div class="element_nouveau">{{ form_widget(form.sauverLeChamp) }}</div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

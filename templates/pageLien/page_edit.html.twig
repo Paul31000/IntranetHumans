@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+   {% block head %}{% endblock %}
+    
+    {% block body %}
+		 <div class="container page-edit">
+            <div class="row ">
+                <div class="col-12 d-flex flex-column justify-content-between px-0">
+					<h2>Edition des pages</h2>
+						<div class="tableau_edition_page">
+
+							{% for page in pages %}
+								<div class="d-flex flex-row align-items-center element-tableau"> Nom de la page:&ensp;<h3> {{ page.nom }} </h3></div>
+								<div class=" table-bordure">
+									<table>
+										<tr>
+											<td>nom lien</td>
+											<td>A propos</td>
+											<td>icone</td>
+											<td>lien</td>
+											<td>categorie</td>
+											<td>supprimer</td>
+											<td>edit et ajouter à d'autres pages</td>
+										</tr>
+									{% for lien in page.liens %}
+										<tr>
+											<td>{{ lien.description }}</td>
+											<td>{{ lien.apropos }}</td>
+											<td><img class="fit-picture" src="{{ lien.image }}"></td>
+											
+											<td>{% set ad= lien.url|split('', 30)%} 
+												{% for breaked_word in ad %}
+													{{breaked_word}}<br>
+												{% endfor %} 
+												<a href="{{ lien.url }}" target="blank">cliquez ici pour voir ou ce lien emmène</a>
+											</td>
+											
+											<td>
+												{% for categorie in lien.categorie %}
+												<div class="couleur_categorie_edit {{ categorie }}">{{ categorie }}/</div>
+												{% endfor %}
+											</td>
+											<td><a href="{{ path('SupprimerLienRedirectPage', { 'idPage': page.id, 'idLien':lien.id })     }}">Supprimer {{lien}} de {{page}}</a></td>
+											<td><a href="/editlien/{{lien.id}}">edit</a></td>
+										</tr>
+									{% endfor %}
+									</table>
+								</div>
+								<br>
+							
+							{% endfor %}
+
+						</div>
+					
+					<br><br><br>
+					<div class="row">
+						<div class="col-5 d-flex flex-column cadre-formulaire p-3">
+							<h2>création d'un nouveau lien:</h2>
+							<div class="guidelines">
+								<li>Appuyez sur ctrl pour ajouter plusieurs éléments sur les menus multiples</li>
+								<li>Les images autorisées sont en jpeg et png</li>
+							</div>
+							{{ form_start(form) }}
+								<div class="element_nouveau">{{ form_label(form.description) }} {{ form_widget(form.description) }} </div>
+								<div class="element_nouveau apropos">A propos {{ form_widget(form.apropos) }} </div>
+								<div class="element_nouveau">Icone {{ form_widget(form.image) }} </div>
+								<div class="element_nouveau">{{ form_label(form.url) }} {{ form_widget(form.url) }} </div>
+								<div class="element_nouveau">{{ form_label(form.pages) }} {{ form_widget(form.pages) }} </div>
+								<div class="element_nouveau">{{ form_label(form.categorie) }} {{ form_widget(form.categorie) }} </div>
+								<div class="element_nouveau">{{ form_label(form.sauverLeLien) }} {{ form_widget(form.sauverLeLien) }} </div>
+							{{ form_end(form) }}
+						</div>
+						<div class="col-2 d-flex flex-column"></div>
+						<div class="col-5 d-flex flex-column">
+							<div class="cadre-formulaire p-3">
+								{{ form_start(formPage) }}
+									<h2>création d'une nouvelle page:</h2>
+									<div class="guidelines">
+										<li>Appuyez sur ctrl pour ajouter plusieurs éléments sur les menus multiples</li>
+										<li>Les images autorisées sont svg</li>
+									</div>
+									<div class="element_nouveau">{{ form_label(formPage.nom)  }} {{ form_widget(formPage.nom)  }} </div>
+									<div class="element_nouveau">{{ form_label(formPage.nomUrl)  }} {{ form_widget(formPage.nomUrl)  }} </div>
+									<div class="element_nouveau">Icone {{ form_widget(formPage.image)}} </div>
+									<div class="element_nouveau">{{ form_label(formPage.liens)  }} {{ form_widget(formPage.liens)  }} </div>
+								{{ form_end(formPage) }}
+							</div>
+						</div>
+	
+					</div>
+					<br><br>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

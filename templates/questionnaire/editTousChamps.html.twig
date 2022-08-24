@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+        <div class="container page-edit">
+        <div class="row ">
+            <div class="col-12 d-flex flex-column justify-content-between px-0">
+                <h2>Gérer les champs de {{questionnaire.sujet}}</h2>
+                    <div class="tableau_edition_page table-bordure">
+                        
+                        <table>
+                            <tr>
+                                <td>nom du champ</td>
+                                <td>type du champ</td>
+                                <td>ordre</td>
+                                <td>éditer le champ</td>
+                                <td>supprimer le champ</td>
+                            </tr>
+                            
+                            {% for champ in champs %}
+                            <tr>
+                                <td>{{ champ.libelle }}</td>
+                                <td>{{ champ.type }}</td>
+                                <td>{{ champ.ordre }}</td>
+                                <td><a href="{{ path('edit_Champ', { 'id': champ.id })     }}">éditer le champ</a></td>
+                                <td><a href="{{ path('supprimerChamp', { 'id': champ.id ,'idQuestionnaire': questionnaire.id })     }}">Supprimer {{ champ.libelle }}</a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+               
+            </div>
+             <br><br> <br><br>
+            <div class="col-5 d-flex flex-column">
+                <div class="cadre-formulaire p-3">
+                    <h2>créer un champ</h2>
+                    {{ form_start(form) }}
+                        <div class="element_nouveau">{{ form_label(form.libelle) }}{{ form_widget(form.libelle) }}</div>
+                        <div class="element_nouveau">{{ form_label(form.type) }}{{ form_widget(form.type) }}</div>
+                        <div class="element_nouveau">{{ form_label(form.ordre) }}{{ form_widget(form.ordre) }}</div>
+                        <div class="element_nouveau">{{ form_label(form.questionnaire) }}{{ form_widget(form.questionnaire) }}</div>
+                        <div class="element_nouveau">{{ form_widget(form.sauverLeChamp) }}</div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

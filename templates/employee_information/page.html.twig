@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+   {% block head %}{% endblock %}
+    
+    {% block body %}
+		<br><br><br>
+		 <div class="container page-edit">
+            <div class="row d-flex justify-content-center">
+				
+                <div class="col-6 cadre-formulaire">
+					
+					<h2>Creez un nouvel employé:</h2>
+					{% if postDone %}
+					<div class="anniversaire_enregistre">Vous avez créé un nouvel employé.</div>
+					{% endif %}
+					<br>
+						{{ form_start(form) }}
+								<div class="element_nouveau">{{ form_label(form.nom) }} {{ form_widget(form.nom) }} </div>
+								<div class="element_nouveau">{{ form_label(form.prenom) }} {{ form_widget(form.prenom) }} </div>
+								<div class="element_nouveau">{{ form_label(form.couleur_css) }} {{ form_widget(form.couleur_css) }} </div>
+								<div class="element_nouveau">{{ form_label(form.dateNaissance) }} {{ form_widget(form.dateNaissance) }} </div>
+								<div class="element_nouveau">{{ form_label(form.sauverLesInformations) }} {{ form_widget(form.sauverLesInformations) }} </div>
+								
+						{{ form_end(form) }}
+
+					<a class="nav-link" href="/"> << Retour accueil </a>
+					
+				</div>
+			</div>
+		</div>
+	{% endblock %}

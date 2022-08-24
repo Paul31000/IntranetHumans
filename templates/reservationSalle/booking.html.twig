@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block head %} 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Popperjs -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+      crossorigin="anonymous"></script>
+<!-- Tempus Dominus JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+      crossorigin="anonymous"></script>
+
+<!-- Tempus Dominus Styles -->
+<link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
+      rel="stylesheet" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}  
+    <body>
+
+
+
+<br><br><br>
+		 <div class="container page-edit">
+            <div class="row d-flex justify-content-center">
+                <div class="col-8 cadre-formulaire">
+                    {% if status =="mauvaise_requete" %}
+                        <div class="rouge_erreur">Il y a déjà une réservation pour ces dates</div>
+                    {% endif  %}
+                    {{ form_start(form) }}
+                    <div class="element_nouveau"> {{ form_label(form.creneau) }}
+                        <div class='input-group log-event' id='linkedPickers1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                            {{ form_widget(form.creneau,{'id':'linkedPickers1Input'}) }}
+                           <span class='input-group-text' data-td-target='#linkedPickers1' data-td-toggle='datetimepicker' >
+                            <span class='fa-solid fa-calendar'></span>
+                           </span>
+                        </div> 
+                     </div>
+                    <div class="element_nouveau"> {{ form_label(form.finCreneau) }}
+                        <div class='input-group log-event' id='linkedPickers2' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                            {{ form_widget(form.finCreneau,{'id':'linkedPickers2Input'}) }}
+                           <span class='input-group-text' data-td-target='#linkedPickers2' data-td-toggle='datetimepicker' >
+                            <span class='fa-solid fa-calendar'></span>
+                           </span>
+                        </div> 
+                     </div>
+                    <div class="element_nouveau">{{ form_label(form.employeOccupant) }} {{ form_widget(form.employeOccupant) }} </div>
+                    <div class="element_nouveau">{{ form_label(form.salle) }} {{ form_widget(form.salle) }} </div>
+                    {{ form_row(form._token) }}
+                    {{ form_end(form) }}
+
+                    <script> const linkedPicker1Element = document.getElementById('linkedPickers1');
+                             const linked1 = new tempusDominus.TempusDominus(linkedPicker1Element);
+                             const linked2 = new tempusDominus.TempusDominus(document.getElementById('linkedPickers2'), { useCurrent: false });
+
+                            
+                    </script>
+                </div>
+			</div>
+		</div>
+
+    </body>
+{% endblock %}  

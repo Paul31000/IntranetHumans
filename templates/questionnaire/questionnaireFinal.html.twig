@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+        <br>
+        <div class="container page-edit">
+            <div class="row ">
+                <div class="col-3 d-flex flex-row justify-content-between px-0">
+                </div>
+                
+                <br><br><br>
+                <div class="col-6 d-flex flex-column justify-content-between cadre-formulaire p-3">
+                    <h2>{{ titreForm }}</h2>
+                    {% if postDone %}
+                    <div class="anniversaire_enregistre">Vos réponses ont étées enregistrées.</div>
+                    {% endif %}
+                    {{ form_start(form) }}
+                        {% for formelement in form %}
+                            {% if  form_label(formelement) != '<label for="questionnaire_final__token">Token</label>' %}
+                                <div class="element_nouveau">{{ form_label(formelement ) }} {{ form_widget(formelement ) }} </div>
+                            {% endif %}
+                        {% endfor %}
+                    {{ form_end(form) }}
+                    <a class="nav-link" href="/"> << Retour accueil </a>
+                </div>
+            </div>
+        </div>
+   
+{% endblock %}

@@ -1,0 +1,79 @@
+
+{% extends 'base.html.twig' %}
+
+   {% block head %}{% endblock %}
+    
+    {% block body %}
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-12 d-flex justify-content-between rechercher-header page-courante px-0">
+                    <div>
+                        <a class="vignette-huco-data liens_huco" href="/page/huco/{{title}}">
+                            <img  src={% if categorie == 'huco'%}
+                                            "{{asset('build/images//huco-hover.jpg')}}"
+                                        {% else %}
+                                            "{{asset('build/images//huco.jpg')}}"
+                                        {% endif %}    
+                                          alt="ressource" >
+                        </a>
+                        <a class="vignette-huco-data liens_data" href="/page/data/{{title}}">
+                            <img  src={% if categorie == 'data'%}
+                                            "{{asset('build/images//data-hover.jpg')}}"
+                                        {% else %}
+                                            "{{asset('build/images//data.jpg')}}"
+                                        {% endif %}    
+                                          alt="ressource" >
+                        </a>
+                    </div>
+                    {{ render(controller('App\\Controller\\SearchController::searchBar')) }}
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid page_courante">
+            <div class="row">
+                <div class="col-12 col-sm-4 fond-bleu  menu_page_courante">
+                    <div class="menu-scroll d-flex flex-row flex-sm-column justify-content-center align-items-center">
+                        
+                        <div class="element_sommaire sommaire_lien">
+                            <a href="/">
+                                <div class="sommaire_page">
+                                    <p><< Retour</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% for page in tab_page %}
+                            {% if page.nomUrl != "accueil" %}
+                                <div class="element_sommaire {% if page.nomUrl == title %} active {% endif %}">
+                                    <a href="/page/{{categorie}}/{{page.nomUrl}}">
+                                        <div class="sommaire_page">
+                                            {{source ( "@svg_path/#{page.image}" ) }}<p>{{page.nom}}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    
+                    </div>
+                </div>
+                <div class="col-12 col-sm-8 d-flex justify-content-center align-items-center">
+                        <div class="row d-flex justify-content-start contenant-lien">
+                            {% for lien in tab_links %}
+                                
+                                <div class="element_lien col-md-4 col-6">
+                                    <div class="">
+                                        <a href="{{lien.url}}" aria-label="{{lien.apropos}}" target="_blank">
+                                            <div class="fond_image"><img class="lien_page_courante" src="{{lien.image}}"  alt="{{lien.description}}" ></div>
+                                            <div class="legende">{{lien.description}}</div>
+                                        </a>
+                                    </div>
+                                </div>   
+
+                            {% endfor %}
+                        </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+        

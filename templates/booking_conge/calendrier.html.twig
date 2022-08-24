@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}     
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+{% endblock %}
+
+{% block body %}  
+        <div class="px-4">
+                <br><br><br>
+                <div><h2>Agenda des conges</h2><a href="/booking_conge">Indiquer un congé</a></div>
+                <br>
+                
+                <div class="multiple-items">
+                    
+                        {% for mois in agenda %}
+                            <div class="element-calendrier-conge">
+                                <div class="mois">{{mois.mois|date('M')| trans({},'messages')}} {{mois.mois|date('Y')}}</div>
+                                    {% for jour in mois.html %}
+                                        <div class="jour {% if jour.jour|date('D')| trans({},'messages')== "Lun" %} lundi {% endif %}">
+                                            <div class="intitule">{{jour.jour|date('d')}} {{jour.jour|date('D')| trans({},'messages')}}: </div>
+                                            {% for entite in jour.html %}
+                                                {{entite|raw}}
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                            </div>
+                        {% endfor %}
+                            
+                </div>
+                <br>
+                <div class="container">
+                <div class="row">
+                
+                {% for employe in employes %}
+                <div class="col-2">
+                    <div class='presentation_employes {{employe.nom}}_{{employe.prenom}}'>{{employe.prenom}} {{employe.nom}}</div>
+                    <style>.{{employe.nom}}_{{employe.prenom}}{{'{'}}background-color:#{{employe.CouleurCss}};{{'}'}}</style>
+                </div>
+                {% endfor %}
+                
+                </div>
+                </div>
+            <br><br><br>
+
+       </div> 
+{% endblock %}  
